@@ -13,20 +13,20 @@ struct GroceryItem: View {
     }
 }
 
-enum groceryType {
-    case Fruits
-    case Vegtables
-    case Meats
-    case Canned
-    case Frozen
-    case Condiments
-    case Snacks
-    case Drinks
+enum groceryType: String{
+    case Fruits  = "Fruits"
+    case Vegtables = "Vegtables"
+    case Meats = "Means"
+    case Canned = "Canned Food"
+    case Frozen = "Frozen"
+    case Condiments = "Condiments"
+    case Snacks = "Snacks"
+    case Drinks = "Drinks"
     case Paper_Products
-    case Household
-    case Personal_Items
-    case Pets
-    case Other
+    case Household = "Household"
+    case Personal_Items = "Personal Items"
+    case Pets = "Pets"
+    case Other = "Other"
 }
 
 class singleGroceryItem {
