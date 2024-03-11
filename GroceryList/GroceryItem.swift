@@ -35,6 +35,7 @@ class singleGroceryItem {
     var quantity : Float
     var completed : Bool
     var grocery_type : groceryType
+    var price : Float?
     
     init(title: String, description: String, quantity: Float, completed: Bool, grocery_type: groceryType) {
         self.title = title
