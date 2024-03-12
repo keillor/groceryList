@@ -67,8 +67,9 @@ class GroceryListManager: ObservableObject {
         myList.remove(at: index)
         return
     }
-    func SortGroceryByEnum(_ selectedGroceryEnum: groceryType) {
+    func SortGroceryByEnum(_ selectedGroceryEnum: groceryType) -> Array<singleGroceryItem> {
         let enumSearch = myList.filter {$0.grocery_type == selectedGroceryEnum}
+        return enumSearch
     }
 }
 

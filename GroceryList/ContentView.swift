@@ -22,7 +22,9 @@ struct ContentView: View {
                 // Portion of the View that contains the list
                 ForEach(manager.myList) {
                     item in HStack {
-                        Image(systemName: item.completed ? "checkmark.square" : "square")
+                        Button(action:{item.completed = true}) {
+                            Image(systemName: item.completed ? "checkmark.square" : "square")
+                        }
                         VStack {
                             Text("\(item.title)  |  \(item.description)")
                             Text("\(Int(item.quantity)) items")
@@ -45,6 +47,6 @@ struct ContentView: View {
     }
 }
 
-//#Preview {
-//    ContentView()
-//}
+#Preview {
+    ContentView()
+}
