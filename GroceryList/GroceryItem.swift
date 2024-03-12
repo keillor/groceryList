@@ -13,6 +13,7 @@ struct GroceryItem: View {
     }
 }
 
+/// Enum that contains the categories of grocery items
 enum groceryType: String{
     case Fruits  = "Fruits"
     case Vegtables = "Vegtables"
@@ -29,11 +30,12 @@ enum groceryType: String{
     case Other = "Other"
 }
 
-class singleGroceryItem {
-    var title : String
-    var description : String
-    var quantity : Float
-    var completed : Bool
+/// Grocery Item Class that encapsulates the various properties of grocery items
+class singleGroceryItem: ObservableObject, Identifiable {
+    @Published var title : String
+    @Published var description : String
+    @Published var quantity : Float
+    @Published var completed : Bool
     var grocery_type : groceryType
     var price : Float?
     
@@ -53,8 +55,9 @@ class singleGroceryItem {
     }
 }
 
-class GroceryListManager {
-    var myList : Array<singleGroceryItem> = []
+/// Grocery List Manager Class contains a list of individual grocery items and provides adding, removal, sorting, and reading operations.
+class GroceryListManager: ObservableObject {
+    @Published var myList : Array<singleGroceryItem> = []
     
     func AddGroceryItem(_ newItem: singleGroceryItem) -> Void {
         myList.append(newItem)
@@ -69,6 +72,6 @@ class GroceryListManager {
     }
 }
 
-#Preview {
-    GroceryItem()
-}
+//#Preview {
+//    GroceryItem()
+//}
