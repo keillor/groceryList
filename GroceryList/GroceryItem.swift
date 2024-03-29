@@ -14,7 +14,7 @@ struct GroceryItem: View {
 }
 
 /// Enum that contains the categories of grocery items
-enum groceryType: String{
+enum groceryType: String, CaseIterable {
     case Fruits  = "Fruits"
     case Vegtables = "Vegtables"
     case Meats = "Means"
@@ -39,12 +39,13 @@ class singleGroceryItem: ObservableObject, Identifiable {
     var grocery_type : groceryType
     var price : Float?
     
-    init(title: String, description: String, quantity: Float, completed: Bool, grocery_type: groceryType) {
+    init(title: String, description: String, quantity: Float, completed: Bool, grocery_type: groceryType, price: Float? = nil) {
         self.title = title
         self.description = description
         self.quantity = quantity
         self.completed = completed
         self.grocery_type = grocery_type
+        self.price = price
     }
     init() {
         self.title = ""
