@@ -17,6 +17,8 @@
 		424179B22B9FA4B7005E6264 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424179B12B9FA4B7005E6264 /* GroceryItem.swift */; };
 		424179B32B9FA4B7005E6264 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424179B12B9FA4B7005E6264 /* GroceryItem.swift */; };
 		424179B42B9FA4B7005E6264 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424179B12B9FA4B7005E6264 /* GroceryItem.swift */; };
+		B95B42252BB7795A0049674B /* GroceryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B42242BB7795A0049674B /* GroceryViews.swift */; };
+		B95B42262BB7795A0049674B /* GroceryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B42242BB7795A0049674B /* GroceryViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,7 @@
 		424179A22B9FA480005E6264 /* GroceryListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListUITests.swift; sourceTree = "<group>"; };
 		424179A42B9FA480005E6264 /* GroceryListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		424179B12B9FA4B7005E6264 /* GroceryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
+		B95B42242BB7795A0049674B /* GroceryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,7 @@
 				424179B12B9FA4B7005E6264 /* GroceryItem.swift */,
 				4241798B2B9FA480005E6264 /* Assets.xcassets */,
 				4241798D2B9FA480005E6264 /* Preview Content */,
+				B95B42242BB7795A0049674B /* GroceryViews.swift */,
 			);
 			path = GroceryList;
 			sourceTree = "<group>";
@@ -264,6 +268,7 @@
 			files = (
 				4241798A2B9FA47D005E6264 /* ContentView.swift in Sources */,
 				424179882B9FA47D005E6264 /* GroceryListApp.swift in Sources */,
+				B95B42252BB7795A0049674B /* GroceryViews.swift in Sources */,
 				424179B22B9FA4B7005E6264 /* GroceryItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +288,7 @@
 			files = (
 				424179A52B9FA480005E6264 /* GroceryListUITestsLaunchTests.swift in Sources */,
 				424179A32B9FA480005E6264 /* GroceryListUITests.swift in Sources */,
+				B95B42262BB7795A0049674B /* GroceryViews.swift in Sources */,
 				424179B42B9FA4B7005E6264 /* GroceryItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
