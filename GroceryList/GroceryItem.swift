@@ -38,6 +38,7 @@ class singleGroceryItem: ObservableObject, Identifiable {
     @Published var completed : Bool
     var grocery_type : groceryType
     var price : Float?
+    var id : UUID
     
     init(title: String, description: String, quantity: Float, completed: Bool, grocery_type: groceryType, price: Float? = nil) {
         self.title = title
@@ -46,6 +47,7 @@ class singleGroceryItem: ObservableObject, Identifiable {
         self.completed = completed
         self.grocery_type = grocery_type
         self.price = price
+        self.id = UUID()
     }
     init() {
         self.title = ""
@@ -53,6 +55,7 @@ class singleGroceryItem: ObservableObject, Identifiable {
         self.quantity = 0.0
         self.completed = false
         self.grocery_type = groceryType.Other
+        self.id = UUID()
     }
 }
 
