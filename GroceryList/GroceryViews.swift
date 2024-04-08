@@ -20,7 +20,7 @@ struct GroceryListView: View {
                     .foregroundStyle(.tint)
                 Text("Grocery List")
                 Spacer()
-                
+                EditButton()
                 List {
                     // Portion of the View that contains the list
                     ForEach(manager.myList) {
@@ -34,7 +34,12 @@ struct GroceryListView: View {
                             }
                             Image(systemName: "ellipsis")
                         }
-                    }
+                    } .onDelete(perform: { offset in
+                        manager.myList.remove(atOffsets: offset)
+                    })
+                    .onMove(perform: { indices, newOffset in
+                        manager.myList.move(fromOffsets: indices, toOffset: newOffset)
+                    })
                     Spacer()
                 }
                 
