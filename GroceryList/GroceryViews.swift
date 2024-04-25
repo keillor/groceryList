@@ -36,9 +36,11 @@ struct GroceryListView: View {
                         }
                     } .onDelete(perform: { offset in
                         manager.myList.remove(atOffsets: offset)
+                        manager.Save()
                     })
                     .onMove(perform: { indices, newOffset in
                         manager.myList.move(fromOffsets: indices, toOffset: newOffset)
+                        manager.Save()
                     })
                     Spacer()
                 }
