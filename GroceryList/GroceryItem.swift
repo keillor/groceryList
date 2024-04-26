@@ -62,6 +62,7 @@ class singleGroceryItem: ObservableObject, Identifiable, Codable {
 /// Grocery List Manager Class contains a list of individual grocery items and provides adding, removal, sorting, and reading operations.
 class GroceryListManager: ObservableObject {
     @Published var myList : [singleGroceryItem] = []
+    @Published var selectedFilterCategory : [groceryType] = []
     var fileurl: URL
     
     // Initializes the manager and also attempts to load persistent data
@@ -69,6 +70,12 @@ class GroceryListManager: ObservableObject {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         self.fileurl = directory.appendingPathComponent("grocery").appendingPathExtension(".plist")
         Load()
+    }
+    
+    func get()->[singleGroceryItem] {
+        //apply filter if present
+        
+        return myList;
     }
     
     // Adds an item into the grocery list. This also saves the list.

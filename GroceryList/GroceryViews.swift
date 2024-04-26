@@ -10,6 +10,7 @@ import SwiftUI
 
 struct GroceryListView: View {
     @EnvironmentObject var manager: GroceryListManager
+    @State private var isShowingSheet = true
     
     var body: some View {
         NavigationView {
@@ -21,9 +22,39 @@ struct GroceryListView: View {
                 Text("Grocery List")
                 Spacer()
                 EditButton()
+                Button(action: {
+                    isShowingSheet.toggle()
+                }) {
+                    Text("Filter").sheet(isPresented: $isShowingSheet
+                    ) {
+                 VStack {
+                     Text("Filters")
+                         .font(.title)
+                         .padding(50)
+                     ForEach(groceryType.allCases, id: \.rawValue) { item in
+                         Button(action: {
+                             if manager.selectedFilterCategory.contains(item) {
+                                 if let number = manager.selectedFilterCategory.firstIndex(of: item) {
+                                     manager.selectedFilterCategory.remove(at: number)
+                                 }
+                             } else {
+                                 manager.selectedFilterCategory.append(item)
+                             }
+                         }) {
+                             Text(item.rawValue).padding(5).background(manager.selectedFilterCategory.contains(item) ? .blue : .clear)
+                         }.clipShape(Capsule()).foregroundColor(manager.selectedFilterCategory.contains(item) ? .white : .gray).overlay(Capsule().stroke(lineWidth: 1).foregroundColor(manager.selectedFilterCategory.contains(item) ? .blue : .gray))
+                         
+                     }
+                     Button("CLEAR ALL",
+                            action: { manager.selectedFilterCategory.removeAll() }).buttonStyle(.borderedProminent)
+                 }
+             }
+                }
+
                 List {
+
                     // Portion of the View that contains the list
-                    ForEach(manager.myList) {
+                    ForEach(manager.get()) {
                         item in HStack {
                             Button(action:{item.completed = !item.completed}) {
                                 Image(systemName: item.completed ? "checkmark.square" : "square")
@@ -42,7 +73,6 @@ struct GroceryListView: View {
                         manager.myList.move(fromOffsets: indices, toOffset: newOffset)
                         manager.Save()
                     })
-                    Spacer()
                 }
                 
                 // Test button that just adds milk
