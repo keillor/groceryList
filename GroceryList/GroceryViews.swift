@@ -43,10 +43,14 @@ struct GroceryListView: View {
                          }) {
                              Text(item.rawValue).padding(5).background(manager.selectedFilterCategory.contains(item) ? .blue : .clear)
                          }.clipShape(Capsule()).foregroundColor(manager.selectedFilterCategory.contains(item) ? .white : .gray).overlay(Capsule().stroke(lineWidth: 1).foregroundColor(manager.selectedFilterCategory.contains(item) ? .blue : .gray))
-                         
                      }
-                     Button("CLEAR ALL",
-                            action: { manager.selectedFilterCategory.removeAll() }).buttonStyle(.borderedProminent)
+                     
+                     Button(action: { manager.selectedFilterCategory.removeAll() }){
+                         HStack {
+                             Text("Clear All")
+                             Image(systemName: "xmark.circle")
+                         }
+                     }.buttonStyle(.plain).foregroundColor(.red)
                  }
              }
                 }

@@ -74,6 +74,9 @@ class GroceryListManager: ObservableObject {
     
     func get()->[singleGroceryItem] {
         //apply filter if present
+        if !selectedFilterCategory.isEmpty {
+            return myList.filter {selectedFilterCategory.contains($0.grocery_type)}
+        }
         
         return myList;
     }
