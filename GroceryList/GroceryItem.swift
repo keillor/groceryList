@@ -72,6 +72,11 @@ class GroceryListManager: ObservableObject {
         Load()
     }
     
+    func Refresh() {
+        let copy_list = self.myList
+        self.myList = copy_list
+    }
+    
     func get()->[singleGroceryItem] {
         //apply filter if present
         if !selectedFilterCategory.isEmpty {

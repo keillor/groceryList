@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GroceryListView: View {
     @EnvironmentObject var manager: GroceryListManager
-    @State private var isShowingSheet = true
+    @State private var isShowingSheet = false
     
     var body: some View {
         NavigationView {
@@ -60,7 +60,10 @@ struct GroceryListView: View {
                     // Portion of the View that contains the list
                     ForEach(manager.get()) {
                         item in HStack {
-                            Button(action:{item.completed = !item.completed}) {
+                            Button(action:{
+                                item.completed = !item.completed
+                                manager.Refresh()
+                            }) {
                                 Image(systemName: item.completed ? "checkmark.square" : "square")
                             }
                             VStack {
