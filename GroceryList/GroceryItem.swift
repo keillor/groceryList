@@ -63,6 +63,7 @@ class singleGroceryItem: ObservableObject, Identifiable, Codable {
 class GroceryListManager: ObservableObject {
     @Published var myList : [singleGroceryItem] = []
     @Published var selectedFilterCategory : [groceryType] = []
+    @Published var onlyUncomplete : Bool = false
     var fileurl: URL
     
     // Initializes the manager and also attempts to load persistent data
@@ -79,11 +80,15 @@ class GroceryListManager: ObservableObject {
     
     func get()->[singleGroceryItem] {
         //apply filter if present
+        var copy = myList
         if !selectedFilterCategory.isEmpty {
-            return myList.filter {selectedFilterCategory.contains($0.grocery_type)}
+            copy = myList.filter {selectedFilterCategory.contains($0.grocery_type)}
+        }
+        if onlyUncomplete {
+            copy = copy.filter {$0.completed == false}
         }
         
-        return myList;
+        return copy
     }
     
     // Adds an item into the grocery list. This also saves the list.

@@ -10,18 +10,13 @@ import SwiftUI
 
 struct GroceryListView: View {
     @EnvironmentObject var manager: GroceryListManager
-    @State private var isShowingSheet = false
+    @State private var isShowingSheet = true
     
     var body: some View {
         NavigationView {
             VStack{
-                // Temporary heading display for the application
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
                 Text("Grocery List")
                 Spacer()
-                EditButton()
                 Button(action: {
                     isShowingSheet.toggle()
                 }) {
@@ -31,21 +26,39 @@ struct GroceryListView: View {
                      Text("Filters")
                          .font(.title)
                          .padding(50)
-                     ForEach(groceryType.allCases, id: \.rawValue) { item in
-                         Button(action: {
-                             if manager.selectedFilterCategory.contains(item) {
-                                 if let number = manager.selectedFilterCategory.firstIndex(of: item) {
-                                     manager.selectedFilterCategory.remove(at: number)
+                     ScrollView (.horizontal,showsIndicators: false){
+                         HStack{
+                                 ForEach(groceryType.allCases, id: \.rawValue) { item in
+                                     Button(action: {
+                                         if manager.selectedFilterCategory.contains(item) {
+                                             if let number = manager.selectedFilterCategory.firstIndex(of: item) {
+                                                 manager.selectedFilterCategory.remove(at: number)
+                                             }
+                                         } else {
+                                             manager.selectedFilterCategory.append(item)
+                                         }
+                                     }) {
+                                         Text(item.rawValue).padding(5).background(manager.selectedFilterCategory.contains(item) ? .blue : .clear)
+                                     }.clipShape(Capsule()).foregroundColor(manager.selectedFilterCategory.contains(item) ? .white : .gray).overlay(Capsule().stroke(lineWidth: 1).foregroundColor(manager.selectedFilterCategory.contains(item) ? .blue : .gray))
                                  }
-                             } else {
-                                 manager.selectedFilterCategory.append(item)
-                             }
-                         }) {
-                             Text(item.rawValue).padding(5).background(manager.selectedFilterCategory.contains(item) ? .blue : .clear)
-                         }.clipShape(Capsule()).foregroundColor(manager.selectedFilterCategory.contains(item) ? .white : .gray).overlay(Capsule().stroke(lineWidth: 1).foregroundColor(manager.selectedFilterCategory.contains(item) ? .blue : .gray))
+                         }
                      }
+                     Toggle(isOn: $manager.onlyUncomplete) {
+                         Text("Show only completed")
+                     }
+                     Button(action: {
+                         manager.myList.removeAll(where: {$0.completed == true})
+                     }, label: {
+                         Text("Remove All Completed")
+                     }).buttonStyle(.borderedProminent)
                      
-                     Button(action: { manager.selectedFilterCategory.removeAll() }){
+                     
+                     
+                     
+                     Button(action: { 
+                         manager.selectedFilterCategory.removeAll()
+                         manager.onlyUncomplete = false
+                     }){
                          HStack {
                              Text("Clear All")
                              Image(systemName: "xmark.circle")
@@ -53,6 +66,13 @@ struct GroceryListView: View {
                      }.buttonStyle(.plain).foregroundColor(.red)
                  }
              }
+                }
+                if(!manager.selectedFilterCategory.isEmpty) {
+                    Button(action: {
+                        manager.selectedFilterCategory.removeAll()
+                    }) {
+                        Text("Filters active! Click to clear")
+                    }
                 }
 
                 List {
