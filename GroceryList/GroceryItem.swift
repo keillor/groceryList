@@ -28,6 +28,37 @@ enum groceryType: String, CaseIterable, Codable {
     case Personal_Items = "Personal Items"
     case Pets = "Pets"
     case Other = "Other"
+    
+    var emoji: (String) {
+            switch self {
+            case .Fruits:
+                return ("🍎")
+            case .Vegtables:
+                return ("🥦")
+            case .Meats:
+                return ("🍣")
+            case .Canned:
+                return ("🥫")
+            case .Frozen:
+                return("🧊")
+            case .Condiments:
+                return("🌭")
+            case .Snacks:
+                return ("🍪")
+            case .Drinks:
+                return("🧃")
+            case .Paper_Products:
+                return("🧻")
+            case .Household:
+                return("🧼")
+            case .Personal_Items:
+                return("🪒")
+            case .Pets:
+                return("🐶")
+            case .Other:
+                return("🪄")
+            }
+        }
 }
 
 /// Grocery Item Class that encapsulates the various properties of grocery items

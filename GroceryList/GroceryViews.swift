@@ -11,6 +11,7 @@ import SwiftUI
 struct GroceryListView: View {
     @EnvironmentObject var manager: GroceryListManager
     @State private var isShowingFilter = true
+    @State private var isShowingNewItem = false
     
     var body: some View {
         NavigationView {
@@ -25,9 +26,10 @@ struct GroceryListView: View {
                         FilterView()
                     }
                 }
-                if(!manager.selectedFilterCategory.isEmpty) {
+                if(!manager.selectedFilterCategory.isEmpty || manager.onlyUncomplete) {
                     Button(action: {
                         manager.selectedFilterCategory.removeAll()
+                        manager.onlyUncomplete = false
                     }) {
                         Label("Filters active! Tap to clear", systemImage: "xmark.circle")
                     }.foregroundColor(.red).buttonStyle(.plain)
@@ -39,16 +41,15 @@ struct GroceryListView: View {
                     ForEach(manager.get()) {
                         item in HStack {
                             Button(action:{
-                                item.completed = !item.completed
+                                item.completed.toggle()
                                 manager.Refresh()
                             }) {
-                                Image(systemName: item.completed ? "checkmark.square" : "square")
+                                Image(systemName: item.completed ? "checkmark.circle.fill" : "circle").imageScale(.large).foregroundColor(.blue)
                             }
                             VStack {
                                 Text("\(item.title)  |  \(item.description)")
                                 Text("\(Int(item.quantity)) items")
                             }
-                            Image(systemName: "ellipsis")
                         }
                     } .onDelete(perform: { offset in
                         manager.myList.remove(atOffsets: offset)
@@ -62,10 +63,11 @@ struct GroceryListView: View {
                 
                 // Test button that just adds milk
                 Button(action: {
-                    let item = singleGroceryItem(title: "Milk", description: "2% fat", quantity: 2, completed: false, grocery_type: .Drinks)
-                    manager.AddGroceryItem(item)
+                    isShowingNewItem.toggle()
                 }) {
-                    Text("Add Test Item")
+                    Label("Add New Item", systemImage: "plus.circle")
+                }.sheet(isPresented: $isShowingNewItem) {
+                    AddGroceryForm()
                 }
             }
         }
@@ -91,41 +93,53 @@ struct AddGroceryForm: View {
         NavigationView {
             VStack {
                 // Form Fields
-                Text("Grocery Title")
-                TextField("TITLE", text: $title_form).padding()
-                Text("Description")
-                TextField("DESCRIPTION", text: $description_form).padding()
-                HStack {
-                    VStack {
-                        Text("Quantity")
-                        TextField("QUANTITY", text: $quantity_form).keyboardType(.decimalPad)
-                            .onChange(of: quantity_form) {
-                                field in
-                                if let value = Float(field) {
-                                    quantity = value
+                Section() {
+                    Text("Grocery Title")
+                    TextField("TITLE", text: $title_form).padding()
+                }
+                Section {
+                    Text("Description")
+                    TextField("DESCRIPTION", text: $description_form).padding()
+                }
+                
+                Section {
+                    HStack {
+                        VStack {
+                            Text("Quantity")
+                            TextField("QUANTITY", text: $quantity_form).keyboardType(.decimalPad)
+                                .onChange(of: quantity_form) {
+                                    field in
+                                    if let value = Float(field) {
+                                        quantity = value
+                                    }
                                 }
-                            }
-                    }.padding()
-                    VStack {
-                        Text("Price")
-                        TextField("PRICE", text: $price_form).keyboardType(.decimalPad)
-                            .onChange(of: price_form) {
-                                field in
-                                if let value = Float(field) {
-                                    price = value
+                        }.padding()
+                        VStack {
+                            Text("Price")
+                            TextField("PRICE", text: $price_form).keyboardType(.decimalPad)
+                                .onChange(of: price_form) {
+                                    field in
+                                    if let value = Float(field) {
+                                        price = value
+                                    }
                                 }
-                            }
+                        }.padding()
+                    }
+                }
+                
+                Section {
+                    Picker("Grocery Type", selection: $grocery_type) {
+                        ForEach(groceryType.allCases, id: \.self) {
+                            option in
+                            Text(option.rawValue).tag(option)
+                        }
+                        .pickerStyle(MenuPickerStyle())
                     }.padding()
                 }
                 
+                
                 // Picker for grocery type
-                Picker("Grocery Type", selection: $grocery_type) {
-                    ForEach(groceryType.allCases, id: \.self) {
-                        option in
-                        Text(option.rawValue).tag(option)
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                }.padding()
+                
                 
                 // Add item button
                 Button(action: {
@@ -144,7 +158,7 @@ struct AddGroceryForm: View {
                     Text("Add Item to List")
                 }.padding()
             }
-        }
+        }.navigationTitle("Item Edit")
     }
 }
 
