@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42316AE52BE1E0E300510BBE /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42316AE42BE1E0E200510BBE /* FilterView.swift */; };
 		424179882B9FA47D005E6264 /* GroceryListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424179872B9FA47D005E6264 /* GroceryListApp.swift */; };
 		4241798A2B9FA47D005E6264 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424179892B9FA47D005E6264 /* ContentView.swift */; };
 		4241798C2B9FA480005E6264 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4241798B2B9FA480005E6264 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		42316AE42BE1E0E200510BBE /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		424179842B9FA47C005E6264 /* GroceryList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroceryList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		424179872B9FA47D005E6264 /* GroceryListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListApp.swift; sourceTree = "<group>"; };
 		424179892B9FA47D005E6264 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				4241798B2B9FA480005E6264 /* Assets.xcassets */,
 				4241798D2B9FA480005E6264 /* Preview Content */,
 				B95B42242BB7795A0049674B /* GroceryViews.swift */,
+				42316AE42BE1E0E200510BBE /* FilterView.swift */,
 			);
 			path = GroceryList;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				424179882B9FA47D005E6264 /* GroceryListApp.swift in Sources */,
 				B95B42252BB7795A0049674B /* GroceryViews.swift in Sources */,
 				428470AF2BDBB262002BD199 /* modifiers.swift in Sources */,
+				42316AE52BE1E0E300510BBE /* FilterView.swift in Sources */,
 				424179B22B9FA4B7005E6264 /* GroceryItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

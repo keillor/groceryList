@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GroceryListView: View {
     @EnvironmentObject var manager: GroceryListManager
-    @State private var isShowingSheet = true
+    @State private var isShowingFilter = true
     
     var body: some View {
         NavigationView {
@@ -18,61 +18,19 @@ struct GroceryListView: View {
                 Text("Grocery List")
                 Spacer()
                 Button(action: {
-                    isShowingSheet.toggle()
+                    isShowingFilter.toggle()
                 }) {
-                    Text("Filter").sheet(isPresented: $isShowingSheet
+                    Label("Filter", systemImage: "line.3.horizontal.decrease.circle").sheet(isPresented: $isShowingFilter
                     ) {
-                 VStack {
-                     Text("Filters")
-                         .font(.title)
-                         .padding(50)
-                     ScrollView (.horizontal,showsIndicators: false){
-                         HStack{
-                                 ForEach(groceryType.allCases, id: \.rawValue) { item in
-                                     Button(action: {
-                                         if manager.selectedFilterCategory.contains(item) {
-                                             if let number = manager.selectedFilterCategory.firstIndex(of: item) {
-                                                 manager.selectedFilterCategory.remove(at: number)
-                                             }
-                                         } else {
-                                             manager.selectedFilterCategory.append(item)
-                                         }
-                                     }) {
-                                         Text(item.rawValue).padding(5).background(manager.selectedFilterCategory.contains(item) ? .blue : .clear)
-                                     }.clipShape(Capsule()).foregroundColor(manager.selectedFilterCategory.contains(item) ? .white : .gray).overlay(Capsule().stroke(lineWidth: 1).foregroundColor(manager.selectedFilterCategory.contains(item) ? .blue : .gray))
-                                 }
-                         }
-                     }
-                     Toggle(isOn: $manager.onlyUncomplete) {
-                         Text("Show only completed")
-                     }
-                     Button(action: {
-                         manager.myList.removeAll(where: {$0.completed == true})
-                     }, label: {
-                         Text("Remove All Completed")
-                     }).buttonStyle(.borderedProminent)
-                     
-                     
-                     
-                     
-                     Button(action: { 
-                         manager.selectedFilterCategory.removeAll()
-                         manager.onlyUncomplete = false
-                     }){
-                         HStack {
-                             Text("Clear All")
-                             Image(systemName: "xmark.circle")
-                         }
-                     }.buttonStyle(.plain).foregroundColor(.red)
-                 }
-             }
+                        FilterView()
+                    }
                 }
                 if(!manager.selectedFilterCategory.isEmpty) {
                     Button(action: {
                         manager.selectedFilterCategory.removeAll()
                     }) {
-                        Text("Filters active! Click to clear")
-                    }
+                        Label("Filters active! Tap to clear", systemImage: "xmark.circle")
+                    }.foregroundColor(.red).buttonStyle(.plain)
                 }
 
                 List {
