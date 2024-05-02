@@ -59,6 +59,36 @@ enum groceryType: String, CaseIterable, Codable {
                 return("🪄")
             }
         }
+    var bgcolor: (Color) {
+        switch self {
+        case .Fruits:
+            return (.red)
+        case .Vegtables:
+            return (.orange)
+        case .Meats:
+            return (.yellow)
+        case .Canned:
+            return (.green)
+        case .Frozen:
+            return (.blue)
+        case .Condiments:
+            return (.indigo)
+        case .Snacks:
+            return (.purple)
+        case .Drinks:
+            return (.pink)
+        case .Paper_Products:
+            return (.brown)
+        case .Household:
+            return (.teal)
+        case .Personal_Items:
+            return (.mint)
+        case .Pets:
+            return (.brown)
+        case .Other:
+            return (.gray)
+        }
+    }
 }
 
 /// Grocery Item Class that encapsulates the various properties of grocery items
