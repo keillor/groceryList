@@ -38,19 +38,23 @@ struct GroceryListView: View {
                 List {
 
                     // Portion of the View that contains the list
-                    ForEach(manager.get()) {
-                        item in HStack {
+                    ForEach(Array(manager.get().enumerated()), id: \.element.id ) {
+                        index, item in HStack {
                             Button(action:{
                                 item.completed.toggle()
                                 manager.Refresh()
+                                manager.Save()
                             }) {
                                 Image(systemName: item.completed ? "checkmark.circle.fill" : "circle").imageScale(.large).foregroundColor(.blue)
-                            }
+                            }.buttonStyle(.borderless)
                             Text("\(Int(item.quantity)) x \(item.title)").font(.title2)
                             /*VStack {
                                 Text("\(Int(item.quantity)) items")
                             }*/
                             Spacer()
+                            NavigationLink(destination: EditView(edit_index: index)) {
+                                //Image(systemName: "pencil").imageScale(.large).foregroundColor(.blue)
+                            }.buttonStyle(.borderless)
                             EmojiView(groceryEnum: item.grocery_type)
                         }
                     } .onDelete(perform: { offset in
@@ -163,6 +167,7 @@ struct AddGroceryForm: View {
                 Button(action: {
                     let item = singleGroceryItem(title: title_form, description: description_form, quantity: quantity, completed: false, grocery_type: grocery_type, price: price)
                     manager.AddGroceryItem(item)
+                    manager.Save()
                     
                     // Resets form inputs to defaults
                     title_form = ""

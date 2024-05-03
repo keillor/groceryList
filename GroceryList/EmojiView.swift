@@ -16,6 +16,6 @@ struct EmojiView: View {
     }
 }
 
-#Preview {
-    EmojiView(groceryEnum: groceryType.Other)
-}
+//#Preview {
+//    EmojiView(groceryEnum: groceryType.Other)
+//}
