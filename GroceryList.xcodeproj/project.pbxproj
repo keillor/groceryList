@@ -22,6 +22,7 @@
 		429812052BE236D100EBBEAE /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429812042BE236D100EBBEAE /* EmojiView.swift */; };
 		B95B42252BB7795A0049674B /* GroceryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B42242BB7795A0049674B /* GroceryViews.swift */; };
 		B95B42262BB7795A0049674B /* GroceryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B42242BB7795A0049674B /* GroceryViews.swift */; };
+		B96AD6772BE56C6D00FEE90F /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96AD6762BE56C6D00FEE90F /* EditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		428470AE2BDBB262002BD199 /* modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modifiers.swift; sourceTree = "<group>"; };
 		429812042BE236D100EBBEAE /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
 		B95B42242BB7795A0049674B /* GroceryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryViews.swift; sourceTree = "<group>"; };
+		B96AD6762BE56C6D00FEE90F /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				B95B42242BB7795A0049674B /* GroceryViews.swift */,
 				42316AE42BE1E0E200510BBE /* FilterView.swift */,
 				429812042BE236D100EBBEAE /* EmojiView.swift */,
+				B96AD6762BE56C6D00FEE90F /* EditView.swift */,
 			);
 			path = GroceryList;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			files = (
 				4241798A2B9FA47D005E6264 /* ContentView.swift in Sources */,
 				424179882B9FA47D005E6264 /* GroceryListApp.swift in Sources */,
+				B96AD6772BE56C6D00FEE90F /* EditView.swift in Sources */,
 				B95B42252BB7795A0049674B /* GroceryViews.swift in Sources */,
 				429812052BE236D100EBBEAE /* EmojiView.swift in Sources */,
 				428470AF2BDBB262002BD199 /* modifiers.swift in Sources */,

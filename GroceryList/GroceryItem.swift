@@ -155,13 +155,17 @@ class GroceryListManager: ObservableObject {
     // Adds an item into the grocery list. This also saves the list.
     func AddGroceryItem(_ newItem: singleGroceryItem) -> Void {
         myList.append(newItem)
-        Save()
         return
     }
     func RemoveGroceryAtIndex(_ index: Int) -> Void {
         myList.remove(at: index)
         return
     }
+    func ReplaceGroceryAtIndex(_ index: Int, _ newItem: singleGroceryItem) {
+        myList.replaceSubrange(index..<index+1, with: [newItem])
+        return
+    }
+    
     func SortGroceryByEnum(_ selectedGroceryEnum: groceryType) -> Array<singleGroceryItem> {
         let enumSearch = myList.filter {$0.grocery_type == selectedGroceryEnum}
         return enumSearch
