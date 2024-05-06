@@ -13,6 +13,7 @@ struct EditView: View {
     
     @State var title_form: String = ""
     @State var description_form: String = ""
+    @State var is_complete: Bool = false
     
     @State var quantity_form: String = "1"
     @State var quantity: Float = 1
@@ -76,7 +77,7 @@ struct EditView: View {
                 }*/
                 // Add item button
                 Button(action: {
-                    let item = singleGroceryItem(title: title_form, description: description_form, quantity: quantity, completed: false, grocery_type: grocery_type, price: price)
+                    let item = singleGroceryItem(title: title_form, description: description_form, quantity: quantity, completed: self.is_complete, grocery_type: grocery_type, price: price)
                     manager.ReplaceGroceryAtIndex(edit_index, item)
                     manager.Save()
                 }) {
@@ -98,6 +99,8 @@ struct EditView: View {
                 price_form = String(priceValue)
                 price = priceValue
             }
+            
+            is_complete = grocery_item.completed
         }
     }
 }
