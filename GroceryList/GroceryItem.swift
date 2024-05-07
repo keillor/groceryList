@@ -171,6 +171,23 @@ class GroceryListManager: ObservableObject {
         return enumSearch
     }
     
+    func FindByUUID(_ id: UUID)-> singleGroceryItem? {
+        let index = myList.firstIndex(where: {$0.id == id})
+        if let index {
+            return myList[index]
+        }
+        return nil
+    }
+    
+    func ReplaceByUUID(_ id: UUID, _ item: singleGroceryItem) {
+        let index = myList.firstIndex(where: {$0.id == id})
+        if let index {
+            myList[index] = item
+        }
+        return
+        
+    }
+    
     // Saves the grocery list data into an external file
     func Save() {
         let propertyListEncoder = PropertyListEncoder()

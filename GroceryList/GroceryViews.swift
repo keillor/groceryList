@@ -52,7 +52,7 @@ struct GroceryListView: View {
                                 Text("\(Int(item.quantity)) items")
                             }*/
                             Spacer()
-                            NavigationLink(destination: EditView(edit_index: index)) {
+                            NavigationLink(destination: EditView(uuid: item.id)) {
                                 //Image(systemName: "pencil").imageScale(.large).foregroundColor(.blue)
                             }.buttonStyle(.borderless)
                             EmojiView(groceryEnum: item.grocery_type)

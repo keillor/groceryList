@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EditView: View {
     @EnvironmentObject var manager : GroceryListManager
-    var edit_index: Int
+    var uuid : UUID
     
     @State var title_form: String = ""
     @State var description_form: String = ""
@@ -23,8 +23,8 @@ struct EditView: View {
     @State var price_form: String = ""
     @State var price : Float?
     
-    init(edit_index: Int) {
-        self.edit_index = edit_index
+    init(uuid: UUID) {
+        self.uuid = uuid
     }
     
     var body: some View {
@@ -78,7 +78,7 @@ struct EditView: View {
                 // Add item button
                 Button(action: {
                     let item = singleGroceryItem(title: title_form, description: description_form, quantity: quantity, completed: self.is_complete, grocery_type: grocery_type, price: price)
-                    manager.ReplaceGroceryAtIndex(edit_index, item)
+                    manager.ReplaceByUUID(self.uuid, item)
                     manager.Save()
                 }) {
                     Text("Confirm Changes")
@@ -86,21 +86,23 @@ struct EditView: View {
             }.navigationTitle("Item Edit")
         }.onAppear {
             
-            let grocery_item = manager.myList[edit_index]
-            title_form = grocery_item.title
-            description_form = grocery_item.description
+            if let grocery_item = manager.FindByUUID(self.uuid) {
+                title_form = grocery_item.title
+                description_form = grocery_item.description
 
-            quantity_form = String(grocery_item.quantity)
-            quantity = grocery_item.quantity
+                quantity_form = String(grocery_item.quantity)
+                quantity = grocery_item.quantity
 
-            grocery_type = grocery_item.grocery_type
+                grocery_type = grocery_item.grocery_type
 
-            if let priceValue = grocery_item.price {
-                price_form = String(priceValue)
-                price = priceValue
+                if let priceValue = grocery_item.price {
+                    price_form = String(priceValue)
+                    price = priceValue
+                }
+                
+                is_complete = grocery_item.completed
             }
             
-            is_complete = grocery_item.completed
         }
     }
 }
