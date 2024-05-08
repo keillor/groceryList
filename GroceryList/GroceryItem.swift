@@ -172,16 +172,14 @@ class GroceryListManager: ObservableObject {
     }
     
     func FindByUUID(_ id: UUID)-> singleGroceryItem? {
-        let index = myList.firstIndex(where: {$0.id == id})
-        if let index {
+        if let index = myList.firstIndex(where: {$0.id == id}) {
             return myList[index]
         }
         return nil
     }
     
     func ReplaceByUUID(_ id: UUID, _ item: singleGroceryItem) {
-        let index = myList.firstIndex(where: {$0.id == id})
-        if let index {
+        if let index = myList.firstIndex(where: {$0.id == id}) {
             myList[index] = item
         }
         return
