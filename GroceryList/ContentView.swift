@@ -33,6 +33,10 @@ struct ContentView: View {
                         Image(systemName: "plus")
                         Text("Add Item")
                     }
+                    SettingsView().tabItem {
+                        Image(systemName: "gear")
+                        Text("Options")
+                    }
                 }
                 .environmentObject(manager)
                 .transition(.scale)
