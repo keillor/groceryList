@@ -27,6 +27,7 @@
 		B95B42252BB7795A0049674B /* GroceryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B42242BB7795A0049674B /* GroceryViews.swift */; };
 		B95B42262BB7795A0049674B /* GroceryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B42242BB7795A0049674B /* GroceryViews.swift */; };
 		B96AD6772BE56C6D00FEE90F /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96AD6762BE56C6D00FEE90F /* EditView.swift */; };
+		CC114C6C2BEC1A660033B323 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC114C6B2BEC1A660033B323 /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		42998DD12BEACCDA00126CCF /* GuidedTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedTripView.swift; sourceTree = "<group>"; };
 		B95B42242BB7795A0049674B /* GroceryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryViews.swift; sourceTree = "<group>"; };
 		B96AD6762BE56C6D00FEE90F /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		CC114C6B2BEC1A660033B323 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				424179872B9FA47D005E6264 /* GroceryListApp.swift */,
 				424179892B9FA47D005E6264 /* ContentView.swift */,
+				CC114C6B2BEC1A660033B323 /* SplashView.swift */,
 				424179B12B9FA4B7005E6264 /* GroceryItem.swift */,
 				428470AE2BDBB262002BD199 /* modifiers.swift */,
 				4241798B2B9FA480005E6264 /* Assets.xcassets */,
@@ -298,6 +301,7 @@
 				42998DD22BEACCDA00126CCF /* GuidedTripView.swift in Sources */,
 				424E19C42BEB1CE400E20825 /* ItemCountGenerator.swift in Sources */,
 				429812052BE236D100EBBEAE /* EmojiView.swift in Sources */,
+				CC114C6C2BEC1A660033B323 /* SplashView.swift in Sources */,
 				428470AF2BDBB262002BD199 /* modifiers.swift in Sources */,
 				42316AE52BE1E0E300510BBE /* FilterView.swift in Sources */,
 				424179B22B9FA4B7005E6264 /* GroceryItem.swift in Sources */,
