@@ -204,6 +204,17 @@ class GroceryListManager: ObservableObject {
             self.myList = decodedData
         }
     }
+    
+    func itemCountsByCategories()-> [groceryType: Int] {
+        // returns a dictionary, with the keys being the groceryType enum
+        // and the values is an integer of how many uncompleted items are in that category
+        var itemCountsByCategory: [groceryType: Int] = [:]
+        for type in groceryType.allCases {
+            let count = myList.filter {$0.grocery_type == type && $0.completed == false}.count
+            itemCountsByCategory[type] = count
+        }
+        return itemCountsByCategory
+    }
 }
 
 //#Preview {

@@ -16,6 +16,10 @@ struct ContentView: View {
                 Image(systemName: "globe")
                 Text("Grocery List")
             }
+            GuidedTripView().tabItem {
+                Image(systemName: "cart")
+                Text("Store Mode")
+            }
             AddGroceryForm().tabItem {
                 Image(systemName: "plus")
                 Text("Add Item")

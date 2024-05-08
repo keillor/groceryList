@@ -35,37 +35,7 @@ struct GroceryListView: View {
                     }.foregroundColor(.red).buttonStyle(.plain)
                 }
 
-                List {
-
-                    // Portion of the View that contains the list
-                    ForEach(Array(manager.get().enumerated()), id: \.element.id ) {
-                        index, item in HStack {
-                            Button(action:{
-                                item.completed.toggle()
-                                manager.Refresh()
-                                manager.Save()
-                            }) {
-                                Image(systemName: item.completed ? "checkmark.circle.fill" : "circle").imageScale(.large).foregroundColor(.blue)
-                            }.buttonStyle(.borderless)
-                            Text("\(Int(item.quantity)) x \(item.title)").font(.title2)
-                            /*VStack {
-                                Text("\(Int(item.quantity)) items")
-                            }*/
-                            Spacer()
-                            NavigationLink(destination: EditView(uuid: item.id)) {
-                                //Image(systemName: "pencil").imageScale(.large).foregroundColor(.blue)
-                            }.buttonStyle(.borderless)
-                            EmojiView(groceryEnum: item.grocery_type)
-                        }
-                    } .onDelete(perform: { offset in
-                        manager.myList.remove(atOffsets: offset)
-                        manager.Save()
-                    })
-                    .onMove(perform: { indices, newOffset in
-                        manager.myList.move(fromOffsets: indices, toOffset: newOffset)
-                        manager.Save()
-                    })
-                }
+                ListGenerator()
                 
                 // Test button that just adds milk
                 Button(action: {
