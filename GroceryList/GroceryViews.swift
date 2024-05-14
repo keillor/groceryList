@@ -46,25 +46,6 @@ struct GroceryListView: View {
                 }.sheet(isPresented: $isShowingNewItem) {
                     AddGroceryForm()
                 }
-//                Button(action: {
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Apple", description: "Fresh and juicy", quantity: 3, completed: false, grocery_type: .Fruits, price: 2))
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Broccoli", description: "Green and nutritious", quantity: 1, completed: false, grocery_type: .Vegtables, price: 1.5))
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Chicken Breast", description: "Lean protein", quantity: 2, completed: false, grocery_type: .Meats, price: 5))
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Canned Soup", description: "Quick meal option", quantity: 4, completed: false, grocery_type: .Canned, price: 3))
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Frozen Pizza", description: "Convenient dinner", quantity: 1, completed: false, grocery_type: .Frozen, price: 8))
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Ketchup", description: "Essential condiment", quantity: 1, completed: false, grocery_type: .Condiments, price: 2.5))
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Chips", description: "Crunchy snacks", quantity: 2, completed: false, grocery_type: .Snacks, price: 4))
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Orange Juice", description: "Freshly squeezed", quantity: 1, completed: false, grocery_type: .Drinks, price: 3))
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Toilet Paper", description: "Soft and absorbent", quantity: 1, completed: false, grocery_type: .Paper_Products, price: 6))
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Laundry Detergent", description: "Cleans clothes effectively", quantity: 1, completed: false, grocery_type: .Household, price: 7))
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Shampoo", description: "For clean and healthy hair", quantity: 1, completed: false, grocery_type: .Personal_Items, price: 4))
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Dog Food", description: "Nutritious meal for your pet", quantity: 1, completed: false, grocery_type: .Pets, price: 9))
-//                    manager.AddGroceryItem(singleGroceryItem(title: "Batteries", description: "Power for your devices", quantity: 4, completed: false, grocery_type: .Other, price: 10))
-//
-//                }) {
-//                    Label("Add Test Items", systemImage: "paperplane.circle")
-//                }
-
             }
         }
     }

@@ -134,8 +134,8 @@
 				4293D2D42BEB6C2800C3408C /* SettingsView.swift */,
 				424E19C72BEB25A500E20825 /* FilteredListGenerator.swift */,
 				424E19C32BEB1CE400E20825 /* ItemCountGenerator.swift */,
-				42316AE42BE1E0E200510BBE /* FilterView.swift */,
 				429812042BE236D100EBBEAE /* EmojiView.swift */,
+				42316AE42BE1E0E200510BBE /* FilterView.swift */,
 				B96AD6762BE56C6D00FEE90F /* EditView.swift */,
 			);
 			path = GroceryList;
