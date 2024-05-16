@@ -17,7 +17,7 @@ struct GroceryItem: View {
 enum groceryType: String, CaseIterable, Codable {
     case Fruits  = "Fruits"
     case Vegtables = "Vegtables"
-    case Meats = "Means"
+    case Meats = "Meats"
     case Canned = "Canned Food"
     case Frozen = "Frozen"
     case Condiments = "Condiments"
@@ -27,6 +27,7 @@ enum groceryType: String, CaseIterable, Codable {
     case Household = "Household"
     case Personal_Items = "Personal Items"
     case Pets = "Pets"
+    case Dairy = "Dairy"
     case Other = "Other"
     
     var emoji: (String) {
@@ -55,6 +56,8 @@ enum groceryType: String, CaseIterable, Codable {
                 return("🪒")
             case .Pets:
                 return("🐶")
+            case .Dairy:
+                return("🥛")
             case .Other:
                 return("🪄")
             }
@@ -85,6 +88,8 @@ enum groceryType: String, CaseIterable, Codable {
             return (.mint)
         case .Pets:
             return (.brown)
+        case .Dairy:
+            return (.blue)
         case .Other:
             return (.gray)
         }
@@ -184,6 +189,35 @@ class GroceryListManager: ObservableObject {
         }
         return
         
+    }
+    
+    func RemoveAllCompleted() {
+        myList.removeAll(where: {$0.completed == true})
+        return
+    }
+    
+    func RemoveAllFilters() {
+        selectedFilterCategory.removeAll()
+        onlyUncomplete = false
+        return
+    }
+    
+    func RemoveByCategory(category: groceryType) {
+        myList.removeAll(where: {
+            $0.grocery_type == category
+        })
+    }
+    
+    func isTripCompleted() -> Bool {
+        if myList.isEmpty {
+            return false
+        }
+        if myList.contains(where: {
+            $0.completed == false
+        }) {
+            return false
+        }
+        return true
     }
     
     // Saves the grocery list data into an external file

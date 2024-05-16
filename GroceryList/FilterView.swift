@@ -11,8 +11,36 @@ struct FilterView: View {
     @EnvironmentObject var manager : GroceryListManager
     var body: some View {
         NavigationView {
-            Form {
-                    ScrollView (.horizontal,showsIndicators: false){
+            List {
+                Section(header: Text("Sort by Category")) {
+                    ForEach(groceryType.allCases, id: \.rawValue) { item in
+                        Button(action: {
+                            if manager.selectedFilterCategory.contains(item) {
+                                if let number = manager.selectedFilterCategory.firstIndex(of: item) {
+                                    manager.selectedFilterCategory.remove(at: number)
+                                    manager.Refresh()
+                                }
+                            } else {
+                                manager.selectedFilterCategory.append(item)
+                                manager.Refresh()
+                            }
+                        }) {
+                            HStack {
+                                if manager.selectedFilterCategory.contains(item) {
+                                    Image(systemName: "checkmark.circle.fill").imageScale(.large).foregroundColor(.green)
+                                } else {
+                                    Image(systemName: "circle").imageScale(.large).foregroundColor(.green)
+                                }
+                                Text(item.rawValue).font(.title3)
+                            }
+                            
+                        }.buttonStyle(.plain)
+                    }
+                    
+                    
+                }
+                
+                /*ScrollView (.horizontal,showsIndicators: false){
                             ForEach(groceryType.allCases, id: \.rawValue) { item in
                                 Button(action: {
                                     if manager.selectedFilterCategory.contains(item) {
@@ -28,22 +56,22 @@ struct FilterView: View {
                         }
                     
                     
-                }
+                }*/
                 Section(header: Text("Other Conditions")) {
+                    Button(action: {
+                        manager.RemoveAllFilters()
+                    }) {
+                        Label {
+                            Text("Clear All Filters")
+                        } icon: {
+                            Image(systemName: "xmark.circle")
+                        }
+
+                    }
                     Toggle(isOn: $manager.onlyUncomplete) {
                         Text("Show only incomplete")
                     }
-                    Button(role: .destructive, action: {
-                        manager.myList.removeAll(where: {$0.completed == true})
-                    }) {
-                        Label("Remove All Complete", systemImage: "eraser.line.dashed").foregroundColor(.red)
-                    }
-                    Button(action: {
-                        manager.selectedFilterCategory.removeAll()
-                        manager.onlyUncomplete = false
-                    }){
-                        Label("Unselect All Filters", systemImage: "xmark.circle")
-                    }
+                    
                 }
             }.navigationTitle("Filters & Options")
         }

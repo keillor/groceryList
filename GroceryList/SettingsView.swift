@@ -9,35 +9,32 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var manager : GroceryListManager
-    @State var isAlert : Bool = false
+    @State var isAlertEraseAll : Bool = false
+    @State private var isAlertRemoveCompleted : Bool = false
     var body: some View {
         NavigationView {
             Form {
-                Section("Options") {
-                    Toggle(isOn: $manager.onlyUncomplete) {
-                        Text("Show only incomplete")
-                    }
+                Section("Remove Tasks") {
+                    //Remove completed Tasks button
                     Button(role: .destructive, action: {
-                        manager.myList.removeAll(where: {$0.completed == true})
+                        isAlertRemoveCompleted = true
                     }) {
-                        Label("Remove All Complete", systemImage: "eraser.line.dashed").foregroundColor(.red)
-                    }
-                    Button(action: {
-                        manager.selectedFilterCategory.removeAll()
-                        manager.onlyUncomplete = false
-                    }){
-                        Label("Unselect All Filters", systemImage: "xmark.circle")
-                    }
-                }
-                Section("Erase All") {
+                        Label("Remove All Complete", systemImage: "checklist.checked").foregroundColor(.red)
+                    }.alert(isPresented: $isAlertRemoveCompleted, content: {
+                        Alert(title: Text("Would you like to delete all completed items?"), primaryButton: Alert.Button.cancel(), secondaryButton: Alert.Button.destructive(Text("Delete"), action: {
+                            manager.RemoveAllCompleted()
+                        }))
+                    })
+                    
+                    //Erase All Tasks Button
                     Button(role: .destructive, action: {
-                        isAlert = true
+                        isAlertEraseAll = true
                     }) {
                         Label("Erase All Tasks", systemImage: "eraser.line.dashed").foregroundColor(.red)
-                    }.alert(isPresented: $isAlert, content: {
-                        Alert(title: Text("Delete All Confirmation"), primaryButton: Alert.Button.cancel(), secondaryButton: Alert.Button.default(Text("Delete"), action: {
+                    }.alert(isPresented: $isAlertEraseAll, content: {
+                        Alert(title: Text("Delete All Confirmation"), primaryButton: Alert.Button.cancel(), secondaryButton: Alert.Button.destructive(Text("Delete"), action: {
                             manager.myList.removeAll()
-                            isAlert = false
+                            isAlertEraseAll = false
                             manager.Save()
                         }))
                     })

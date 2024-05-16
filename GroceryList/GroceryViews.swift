@@ -28,8 +28,11 @@ struct GroceryListView: View {
                 }
                 if(!manager.selectedFilterCategory.isEmpty || manager.onlyUncomplete) {
                     Button(action: {
-                        manager.selectedFilterCategory.removeAll()
-                        manager.onlyUncomplete = false
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0.5)) {
+                            manager.selectedFilterCategory.removeAll()
+                            manager.onlyUncomplete = false
+                        }
+                        
                     }) {
                         Label("Filters active! Tap to clear", systemImage: "xmark.circle")
                     }.foregroundColor(.red).buttonStyle(.plain)
@@ -38,6 +41,13 @@ struct GroceryListView: View {
                 ListGenerator()
                 
                 // Test button that just adds milk
+                Button(action: {
+                    withAnimation {
+                        manager.AddGroceryItem(singleGroceryItem(title: "Milk", description: "for the fridge", quantity: 1.0, completed: false, grocery_type: groceryType.Drinks, price: 5.0))
+                    }
+                }) {
+                    Label("Add Text Item", systemImage: "plus.circle")
+                }
                 Button(action: {
                     isShowingNewItem.toggle()
 
