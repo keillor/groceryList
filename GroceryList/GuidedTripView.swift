@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import ConfettiSwiftUI
 
 struct GuidedTripView: View {
     @EnvironmentObject var manager : GroceryListManager
+    @State var confet : Int = 0
     var body: some View {
         NavigationView {
             if !manager.isTripCompleted() {
@@ -29,7 +31,10 @@ struct GuidedTripView: View {
             } else if manager.isTripCompleted() {
                 //add confetti!
                 VStack {
-                    Text("Yay!")
+                    
+                    Text("Yay!").onTapGesture {
+                        confet += 1
+                    }.confettiCannon(counter: $confet)
                 }
             } else if manager.myList.isEmpty {
                 VStack {
