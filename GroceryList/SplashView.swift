@@ -15,11 +15,9 @@ struct SplashView: View {
             if self.isActive {
                 ContentView() } else {
                     Rectangle()
-                        .background(Color.black)
+                        .background(Color.white)
                     Image("GroceryListLogo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 900, height: 730)
+                        .frame(width: 500, height: 500)
                 }
         }
         .onAppear {
