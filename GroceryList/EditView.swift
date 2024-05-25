@@ -28,7 +28,6 @@ struct EditView: View {
     }
     
     var body: some View {
-        NavigationView {
             // Form Fields
             Form {
                 Section() {
@@ -84,7 +83,7 @@ struct EditView: View {
                     Text("Confirm Changes")
                 }
             }.navigationTitle("Item Edit")
-        }.onAppear {
+        .onAppear {
             
             if let grocery_item = manager.FindByUUID(self.uuid) {
                 title_form = grocery_item.title

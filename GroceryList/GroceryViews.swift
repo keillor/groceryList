@@ -10,23 +10,11 @@ import SwiftUI
 
 struct GroceryListView: View {
     @EnvironmentObject var manager: GroceryListManager
-    @State private var isShowingFilter = false
-    @State private var isShowingNewItem = false
     
     var body: some View {
-        NavigationView {
-            VStack{
-                Text("Grocery List")
-                Spacer()
-                Button(action: {
-                    isShowingFilter.toggle()
-                }) {
-                    Label("Filter", systemImage: "line.3.horizontal.decrease.circle").sheet(isPresented: $isShowingFilter
-                    ) {
-                        FilterView()
-                    }
-                }
-                if(!manager.selectedFilterCategory.isEmpty || manager.onlyUncomplete) {
+            NavigationView {
+                VStack{
+                    if(!manager.selectedFilterCategory.isEmpty || manager.onlyUncomplete) {
                     Button(action: {
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0.5)) {
                             manager.selectedFilterCategory.removeAll()
@@ -46,16 +34,20 @@ struct GroceryListView: View {
                         manager.AddGroceryItem(singleGroceryItem(title: "Milk", description: "for the fridge", quantity: 1.0, completed: false, grocery_type: groceryType.Drinks, price: 5.0))
                     }
                 }) {
-                    Label("Add Text Item", systemImage: "plus.circle")
+                    Label("Add Test Item", systemImage: "plus.circle")
                 }
-                Button(action: {
-                    isShowingNewItem.toggle()
-
-                }) {
-                    Label("Add New Item", systemImage: "plus.circle")
-                }.sheet(isPresented: $isShowingNewItem) {
+            }.navigationTitle("Main List").toolbar {
+                NavigationLink {
+                    FilterView()
+                } label: {
+                    Image(systemName: "line.3.horizontal.decrease.circle")
+                }
+                NavigationLink {
                     AddGroceryForm()
+                } label: {
+                    Image(systemName: "plus")
                 }
+
             }
         }
     }
