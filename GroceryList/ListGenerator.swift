@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ListGenerator: View {
     @EnvironmentObject var manager : GroceryListManager
-    @State private var rotationAngle: Double = 0
     var body: some View {
         List {
             ForEach($manager.myList, id: \.id) {

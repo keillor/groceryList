@@ -126,7 +126,7 @@ class singleGroceryItem: ObservableObject, Identifiable, Codable {
 }
 
 /// Grocery List Manager Class contains a list of individual grocery items and provides adding, removal, sorting, and reading operations.
-class GroceryListManager: ObservableObject {
+class GroceryListManager: ObservableObject, Identifiable {
     @Published var myList : [singleGroceryItem] = []
     @Published var selectedFilterCategory : [groceryType] = []
     @Published var onlyUncomplete : Bool = false
@@ -136,6 +136,12 @@ class GroceryListManager: ObservableObject {
     init() {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         self.fileurl = directory.appendingPathComponent("grocery").appendingPathExtension(".plist")
+        Load()
+    }
+    
+    init(id : UUID) {
+        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        self.fileurl = directory.appendingPathComponent(id.uuidString).appendingPathExtension(".plist")
         Load()
     }
     
@@ -246,6 +252,25 @@ class GroceryListManager: ObservableObject {
             itemCountsByCategory[type] = count
         }
         return itemCountsByCategory
+    }
+    
+    func sampleData() {
+        self.myList.removeAll()
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Canned))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Condiments))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Dairy))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Drinks))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Frozen))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Fruits))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Household))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Meats))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Other))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Paper_Products))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Personal_Items))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Pets))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Snacks))
+        self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Vegtables))
+        self.Save()
     }
 }
 

@@ -47,7 +47,6 @@ struct GroceryListView: View {
                 } label: {
                     Image(systemName: "plus")
                 }
-
             }
         }
     }

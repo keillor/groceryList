@@ -25,8 +25,11 @@
 		4288B8392BF43C2E009D757E /* SingleItemGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4288B8382BF43C2E009D757E /* SingleItemGeneratorView.swift */; };
 		4288B83C2BF442E8009D757E /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4288B83B2BF442E8009D757E /* ConfettiSwiftUI */; };
 		4293D2D52BEB6C2800C3408C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4293D2D42BEB6C2800C3408C /* SettingsView.swift */; };
+		429532BE2C0818300056CD0A /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 429532BD2C0818300056CD0A /* Collections */; };
+		429532C02C0818B00056CD0A /* AllListManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429532BF2C0818B00056CD0A /* AllListManageView.swift */; };
 		429812052BE236D100EBBEAE /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429812042BE236D100EBBEAE /* EmojiView.swift */; };
 		42998DD22BEACCDA00126CCF /* GuidedTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42998DD12BEACCDA00126CCF /* GuidedTripView.swift */; };
+		42B1547A2C07284C00C6D843 /* MultiListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B154792C07284C00C6D843 /* MultiListManager.swift */; };
 		B95B42252BB7795A0049674B /* GroceryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B42242BB7795A0049674B /* GroceryViews.swift */; };
 		B95B42262BB7795A0049674B /* GroceryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B42242BB7795A0049674B /* GroceryViews.swift */; };
 		B96AD6772BE56C6D00FEE90F /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96AD6762BE56C6D00FEE90F /* EditView.swift */; };
@@ -69,8 +72,10 @@
 		428470AE2BDBB262002BD199 /* modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modifiers.swift; sourceTree = "<group>"; };
 		4288B8382BF43C2E009D757E /* SingleItemGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemGeneratorView.swift; sourceTree = "<group>"; };
 		4293D2D42BEB6C2800C3408C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		429532BF2C0818B00056CD0A /* AllListManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListManageView.swift; sourceTree = "<group>"; };
 		429812042BE236D100EBBEAE /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
 		42998DD12BEACCDA00126CCF /* GuidedTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedTripView.swift; sourceTree = "<group>"; };
+		42B154792C07284C00C6D843 /* MultiListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiListManager.swift; sourceTree = "<group>"; };
 		B95B42242BB7795A0049674B /* GroceryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryViews.swift; sourceTree = "<group>"; };
 		B96AD6762BE56C6D00FEE90F /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		CC114C6B2BEC1A660033B323 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -81,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				429532BE2C0818300056CD0A /* Collections in Frameworks */,
 				4288B83C2BF442E8009D757E /* ConfettiSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,10 +136,12 @@
 				CC114C6B2BEC1A660033B323 /* SplashView.swift */,
 				424179B12B9FA4B7005E6264 /* GroceryItem.swift */,
 				4288B8382BF43C2E009D757E /* SingleItemGeneratorView.swift */,
+				42B154792C07284C00C6D843 /* MultiListManager.swift */,
 				428470AE2BDBB262002BD199 /* modifiers.swift */,
 				4241798B2B9FA480005E6264 /* Assets.xcassets */,
 				4241798D2B9FA480005E6264 /* Preview Content */,
 				B95B42242BB7795A0049674B /* GroceryViews.swift */,
+				429532BF2C0818B00056CD0A /* AllListManageView.swift */,
 				424E19C12BEB161000E20825 /* ListGenerator.swift */,
 				42998DD12BEACCDA00126CCF /* GuidedTripView.swift */,
 				4293D2D42BEB6C2800C3408C /* SettingsView.swift */,
@@ -189,6 +197,7 @@
 			name = GroceryList;
 			packageProductDependencies = (
 				4288B83B2BF442E8009D757E /* ConfettiSwiftUI */,
+				429532BD2C0818300056CD0A /* Collections */,
 			);
 			productName = GroceryList;
 			productReference = 424179842B9FA47C005E6264 /* GroceryList.app */;
@@ -264,6 +273,7 @@
 			mainGroup = 4241797B2B9FA47C005E6264;
 			packageReferences = (
 				4288B83A2BF442E8009D757E /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+				42B1547B2C072A5600C6D843 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 424179852B9FA47C005E6264 /* Products */;
 			projectDirPath = "";
@@ -310,6 +320,7 @@
 				4241798A2B9FA47D005E6264 /* ContentView.swift in Sources */,
 				424179882B9FA47D005E6264 /* GroceryListApp.swift in Sources */,
 				4288B8392BF43C2E009D757E /* SingleItemGeneratorView.swift in Sources */,
+				42B1547A2C07284C00C6D843 /* MultiListManager.swift in Sources */,
 				B96AD6772BE56C6D00FEE90F /* EditView.swift in Sources */,
 				B95B42252BB7795A0049674B /* GroceryViews.swift in Sources */,
 				424E19C82BEB25A500E20825 /* FilteredListGenerator.swift in Sources */,
@@ -322,6 +333,7 @@
 				424179B22B9FA4B7005E6264 /* GroceryItem.swift in Sources */,
 				424E19C22BEB161000E20825 /* ListGenerator.swift in Sources */,
 				4293D2D52BEB6C2800C3408C /* SettingsView.swift in Sources */,
+				429532C02C0818B00056CD0A /* AllListManageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +678,14 @@
 				minimumVersion = 1.1.0;
 			};
 		};
+		42B1547B2C072A5600C6D843 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -673,6 +693,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4288B83A2BF442E8009D757E /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
 			productName = ConfettiSwiftUI;
+		};
+		429532BD2C0818300056CD0A /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42B1547B2C072A5600C6D843 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

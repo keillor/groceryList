@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct GroceryListApp: App {
+    @StateObject var multiManager : MultiListManager = MultiListManager()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                AllListManageView().environmentObject(multiManager)
+            }
         }
     }
 }
