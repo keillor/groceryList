@@ -12,41 +12,44 @@ struct GroceryListView: View {
     @EnvironmentObject var manager: GroceryListManager
     
     var body: some View {
-                VStack{
-                    if(!manager.selectedFilterCategory.isEmpty || manager.onlyUncomplete) {
-                    Button(action: {
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0.5)) {
-                            manager.selectedFilterCategory.removeAll()
-                            manager.onlyUncomplete = false
-                        }
-                        
-                    }) {
-                        Label("Filters active! Tap to clear", systemImage: "xmark.circle")
-                    }.foregroundColor(.red).buttonStyle(.plain)
-                }
-
-                ListGenerator()
-                
-                // Test button that just adds milk
+        NavigationView {
+            VStack{
+                if(!manager.selectedFilterCategory.isEmpty || manager.onlyUncomplete) {
                 Button(action: {
-                    withAnimation {
-                        manager.sampleData()
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0.5)) {
+                        manager.selectedFilterCategory.removeAll()
+                        manager.onlyUncomplete = false
                     }
+                    
                 }) {
-                    Label("Add Test Item", systemImage: "plus.circle")
-                }
-                }.navigationTitle(manager.title).toolbar {
-                NavigationLink {
-                    FilterView()
-                } label: {
-                    Image(systemName: "line.3.horizontal.decrease.circle")
-                }
-                NavigationLink {
-                    AddGroceryForm()
-                } label: {
-                    Image(systemName: "plus")
-                }
+                    Label("Filters active! Tap to clear", systemImage: "xmark.circle")
+                }.foregroundColor(.red).buttonStyle(.plain)
             }
+
+            ListGenerator()
+            
+            // Test button that just adds milk
+            Button(action: {
+                withAnimation {
+                    manager.sampleData()
+                }
+            }) {
+                Label("Add Test Item", systemImage: "plus.circle")
+            }
+            }.navigationTitle(manager.title).toolbar {
+            NavigationLink {
+                FilterView()
+            } label: {
+                Image(systemName: "line.3.horizontal.decrease.circle")
+            }
+            NavigationLink {
+                AddGroceryForm()
+            } label: {
+                Image(systemName: "plus")
+            }
+        }
+        }
+                
         }
 }
 
