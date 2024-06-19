@@ -35,7 +35,7 @@ struct SingleItemGeneratorView: View {
         /*VStack {
             Text("\(Int(item.quantity)) items")
         }*/
-        NavigationLink(destination: EditView(uuid: item.id)) {
+        NavigationLink(destination: EditView(manager: manager,uuid: item.id)) {
             //Image(systemName: "pencil").imageScale(.large).foregroundColor(.blue)
         }.buttonStyle(.borderless).frame(width: 0, height: 0).opacity(0)
         EmojiView(groceryEnum: item.grocery_type)

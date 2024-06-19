@@ -16,8 +16,7 @@ struct ListGenerator: View {
                     SingleItemGeneratorView(item: item)
                 }
             } .onDelete(perform: { offset in
-                manager.myList.remove(atOffsets: offset)
-                manager.Save()
+                manager.RemoveByOffset(offset)
             })
             .onMove(perform: { indices, newOffset in
                 manager.myList.move(fromOffsets: indices, toOffset: newOffset)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditView: View {
-    @EnvironmentObject var manager : GroceryListManager
+    var manager : GroceryListManager
     var uuid : UUID
     
     @State var title_form: String = ""
@@ -23,7 +23,8 @@ struct EditView: View {
     @State var price_form: String = ""
     @State var price : Float?
     
-    init(uuid: UUID) {
+    init(manager: GroceryListManager,uuid: UUID) {
+        self.manager = manager
         self.uuid = uuid
     }
     

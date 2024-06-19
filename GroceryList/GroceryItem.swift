@@ -131,23 +131,28 @@ class GroceryListManager: ObservableObject, Identifiable {
     @Published var selectedFilterCategory : [groceryType] = []
     @Published var onlyUncomplete : Bool = false
     var fileurl: URL
+    var title: String
     
     // Initializes the manager and also attempts to load persistent data
     init() {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        self.fileurl = directory.appendingPathComponent("grocery").appendingPathExtension(".plist")
+        self.fileurl = directory.appendingPathComponent("grocery").appendingPathExtension("plist")
+        self.title = "My List"
         Load()
     }
     
-    init(id : UUID) {
+    init(id : UUID, title : String) {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        self.fileurl = directory.appendingPathComponent(id.uuidString).appendingPathExtension(".plist")
+        self.fileurl = directory.appendingPathComponent(id.uuidString).appendingPathExtension("plist")
+        self.title = title
+        print(self.fileurl)
         Load()
     }
     
     func Refresh() {
         let copy_list = self.myList
         self.myList = copy_list
+        self.Save()
     }
     
     func get()->[singleGroceryItem] {
@@ -166,6 +171,7 @@ class GroceryListManager: ObservableObject, Identifiable {
     // Adds an item into the grocery list. This also saves the list.
     func AddGroceryItem(_ newItem: singleGroceryItem) -> Void {
         myList.append(newItem)
+        self.Save()
         return
     }
     func RemoveGroceryAtIndex(_ index: Int) -> Void {
@@ -194,7 +200,18 @@ class GroceryListManager: ObservableObject, Identifiable {
             myList[index] = item
         }
         return
-        
+    }
+    
+    func RemoveAllItems() {
+        myList.removeAll()
+        self.Save()
+        return
+    }
+    
+    func RemoveByOffset(_ offset: IndexSet) {
+        myList.remove(atOffsets: offset)
+        self.Save()
+        return
     }
     
     func RemoveAllCompleted() {
@@ -255,7 +272,6 @@ class GroceryListManager: ObservableObject, Identifiable {
     }
     
     func sampleData() {
-        self.myList.removeAll()
         self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Canned))
         self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Condiments))
         self.AddGroceryItem(singleGroceryItem(title: "Food", description: "", quantity: 1, completed: false, grocery_type: groceryType.Dairy))

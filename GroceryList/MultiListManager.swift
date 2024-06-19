@@ -18,7 +18,7 @@ class MultiListManager : ObservableObject, Identifiable {
     
     init() {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        self.fileURL = directory.appendingPathComponent("index").appendingPathExtension(".plist")
+        self.fileURL = directory.appendingPathComponent("index").appendingPathExtension("plist")
         let propertyListDecoder = PropertyListDecoder()
         if let fetchedData = try? Data(contentsOf: self.fileURL),
            let decodedData = try? propertyListDecoder.decode(OrderedDictionary<UUID, String>.self, from: fetchedData) {
@@ -31,7 +31,7 @@ class MultiListManager : ObservableObject, Identifiable {
     func load() {
         // Loads in the index file (with all of the lists UUIDs)
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        self.fileURL = directory.appendingPathComponent("index").appendingPathExtension(".plist")
+        self.fileURL = directory.appendingPathComponent("index").appendingPathExtension("plist")
         let propertyListDecoder = PropertyListDecoder()
         if let fetchedData = try? Data(contentsOf: self.fileURL),
            let decodedData = try? propertyListDecoder.decode(OrderedDictionary<UUID, String>.self, from: fetchedData) {
@@ -66,20 +66,41 @@ class MultiListManager : ObservableObject, Identifiable {
         self.allLists = copy_list
     }
     
+    func RemoveAll() {
+        //removes all lists from multimanager.
+        
+        /* //less efficient version of this, but code is cleaner
+        for list in self.allLists {
+            self.DeleteList(list.key)
+        }*/
+        for list in self.allLists {
+            self.DeleteFile(id: list.key)
+        }
+        self.allLists.removeAll()
+        self.save()
+    }
+    
+    func RenameList(key: UUID, newTitle: String) {
+        if(!newTitle.isEmpty) {
+            self.allLists[key] = newTitle
+        }
+        self.save()
+        return
+    }
+    
     func DeleteFile(id: UUID) {
-        //deletes the file of the selected UUID.
-        //catches its own error if file DNE
+        // Deletes the file of the selected UUID.
+        // Catches its own error if file DNE.
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let fileurl = directory.appendingPathComponent(id.uuidString).appendingPathExtension(".plist")
+        let fileurl = directory.appendingPathComponent(id.uuidString).appendingPathExtension("plist")
         
-        let fileManager = FileManager()
+        let fileManager = FileManager.default
         do {
-            try fileManager.removeItem(atPath: fileurl.absoluteString)
+            print(fileurl)
+            try fileManager.removeItem(at: fileurl)
+        } catch {
+            print("Could not delete file: \(error.localizedDescription)")
         }
-        catch {
-            print("Could not delete files")
-        }
-        
     }
     
     func DeleteList(_ indexSet: IndexSet) {
@@ -89,7 +110,20 @@ class MultiListManager : ObservableObject, Identifiable {
             self.allLists.removeValue(forKey: keyToDelete)
             self.DeleteFile(id: keyToDelete)
         }
-        
         self.save()
+    }
+    
+    func DeleteList(_ key: UUID) {
+        //for general use when the key of the key/value pair is avalible in the context
+        self.allLists.removeValue(forKey: key)
+        self.DeleteFile(id: key)
+        self.save()
+    }
+    
+    func ChangeListTitle(_ key: UUID, _ newTitle: String) {
+        if(!newTitle.isEmpty) {
+            self.allLists[key] = newTitle
+        }
+        
     }
 }

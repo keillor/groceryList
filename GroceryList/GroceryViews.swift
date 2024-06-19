@@ -12,7 +12,6 @@ struct GroceryListView: View {
     @EnvironmentObject var manager: GroceryListManager
     
     var body: some View {
-            NavigationView {
                 VStack{
                     if(!manager.selectedFilterCategory.isEmpty || manager.onlyUncomplete) {
                     Button(action: {
@@ -31,12 +30,12 @@ struct GroceryListView: View {
                 // Test button that just adds milk
                 Button(action: {
                     withAnimation {
-                        manager.AddGroceryItem(singleGroceryItem(title: "Milk", description: "for the fridge", quantity: 1.0, completed: false, grocery_type: groceryType.Drinks, price: 5.0))
+                        manager.sampleData()
                     }
                 }) {
                     Label("Add Test Item", systemImage: "plus.circle")
                 }
-            }.navigationTitle("Main List").toolbar {
+                }.navigationTitle(manager.title).toolbar {
                 NavigationLink {
                     FilterView()
                 } label: {
@@ -49,7 +48,6 @@ struct GroceryListView: View {
                 }
             }
         }
-    }
 }
 
 
@@ -119,7 +117,6 @@ struct AddGroceryForm: View {
                 Button(action: {
                     let item = singleGroceryItem(title: title_form, description: description_form, quantity: quantity, completed: false, grocery_type: grocery_type, price: price)
                     manager.AddGroceryItem(item)
-                    manager.Save()
                     
                     // Resets form inputs to defaults
                     title_form = ""

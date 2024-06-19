@@ -10,7 +10,9 @@ import SwiftUI
 struct AllListManageView: View {
     @EnvironmentObject var multiManager : MultiListManager
     @State var isShowingNewListSheet : Bool = false
+    @State var isShowingEditListTitleSheet : Bool = false
     @State var newListTitle : String = ""
+    @State var editListUUID : UUID = UUID()
     var body: some View {
         VStack {
             Button(action: {
@@ -18,26 +20,56 @@ struct AllListManageView: View {
             }) {
                 Text("Push to add new list")
             }.sheet(isPresented: $isShowingNewListSheet, content: {
-                TextField("New List Title", text: $newListTitle, prompt: Text("New List Title")).padding().clipShape(Capsule()).overlay(Capsule().stroke(lineWidth: 3).foregroundStyle(.blue)).padding()
-                Button(action: {
-                    if(newListTitle == "") {
-                        
-                    } else {
-                        _ = multiManager.createNewList(name: newListTitle) // _ = multiManager.createNewList ##ignores the return value
+                VStack {
+                    Text("Create a New List").underline().font(.largeTitle)
+                                             .bold()
+                                             .foregroundStyle(
+                                                LinearGradient(
+                                                    colors: [.red, .blue, .green, .yellow],
+                                                    startPoint: .leading,
+                                                    endPoint: .trailing))
+                                             .padding()
+                    TextField("New List Title", text: $newListTitle, prompt: Text("New List Title")).padding().clipShape(Capsule()).overlay(Capsule().stroke(lineWidth: 3).foregroundStyle(.blue)).padding().onSubmit {
+                        if(newListTitle == "") {
+                            return
+                        }
+                        multiManager.createNewList(name: newListTitle) // _ = multiManager.createNewList ##ignores the return value
                         isShowingNewListSheet.toggle()
                         newListTitle = ""
-                        print(multiManager.allLists)
                     }
-                    
-                    
-                }) {
-                    Text("Save New List")
-                }.buttonStyle(.borderedProminent)
+                    Button(action: {
+                        if(newListTitle == "") {
+                            return
+                        }
+                        multiManager.createNewList(name: newListTitle) // _ = multiManager.createNewList ##ignores the return value
+                        isShowingNewListSheet.toggle()
+                        newListTitle = ""
+                    }) {
+                        Text("Save New List").bold()
+                    }.frame(maxWidth: .infinity).font(.title3).foregroundStyle(.white).padding().background(.blue).clipShape(Capsule()).overlay(Capsule().stroke(lineWidth: 3).foregroundStyle(.blue)).padding()
+                }
+                
+            }).sheet(isPresented: $isShowingEditListTitleSheet, content: {
+                VStack {
+                    Text("Update List Name").underline().font(.largeTitle)
+                                             .bold()
+                                             .foregroundStyle(.blue)
+                                             .padding()
+                    TextField("Renamed List Title", text: $newListTitle, prompt: Text("Renamed List Title")).padding().clipShape(Capsule()).overlay(Capsule().stroke(lineWidth: 3).foregroundStyle(.blue)).padding().onSubmit {
+                        multiManager.RenameList(key: editListUUID, newTitle: newListTitle)
+                    }
+                    Button(action: {
+                        multiManager.RenameList(key: editListUUID, newTitle: newListTitle)
+                        isShowingEditListTitleSheet = false
+                    }) {
+                        Text("Update Name")
+                    }.frame(maxWidth: .infinity).font(.title3).foregroundStyle(.white).padding().background(.blue).clipShape(Capsule()).overlay(Capsule().stroke(lineWidth: 3).foregroundStyle(.blue)).padding()
+                }
+                
             })
             
             Button(action: {
-                multiManager.allLists.removeAll()
-                multiManager.save()
+                multiManager.RemoveAll()
             }) {
                 Text("Remove All")
             }
@@ -45,22 +77,29 @@ struct AllListManageView: View {
             List {
                 ForEach(multiManager.allLists.elements, id: \.key) { element in
                     NavigationLink {
-                        ContentView().environmentObject(GroceryListManager(id: element.key))
+                        ContentView().environmentObject(GroceryListManager(id: element.key, title: element.value))
                     } label: {
                         Text("\(element.value)")
                     }.swipeActions(content: {
-                        Button(role: .destructive) {
-                            //TODO
-                        } label: {
-                            //TODO
+                        Button(role: .destructive, action: {
+                            withAnimation {
+                                multiManager.DeleteList(element.key)
+                            }
+                            
+                        }) {
+                            Image(systemName: "trash")
                         }
+                        Button(action: {
+                            self.editListUUID = element.key
+                            self.newListTitle = element.value
+                            self.isShowingEditListTitleSheet = true
+                        }) {
+                            Image(systemName: "pencil")
+                        }.tint(.yellow)
 
                     })
 
                 }.onDelete(perform: { indexSet in
-                    
-                    //TODO
-                    //make this a function inside of multiManager
                     multiManager.DeleteList(indexSet)
                 })
 

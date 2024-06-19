@@ -33,9 +33,9 @@ struct SettingsView: View {
                         Label("Erase All Tasks", systemImage: "eraser.line.dashed").foregroundColor(.red)
                     }.alert(isPresented: $isAlertEraseAll, content: {
                         Alert(title: Text("Delete All Confirmation"), primaryButton: Alert.Button.cancel(), secondaryButton: Alert.Button.destructive(Text("Delete"), action: {
-                            manager.myList.removeAll()
+                            manager.RemoveAllItems()
                             isAlertEraseAll = false
-                            manager.Save()
+                            
                         }))
                     })
                 }
